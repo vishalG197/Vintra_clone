@@ -2,7 +2,19 @@ import { Link ,useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import "./Navbar.scss";
 import imglogo from "../Images/VintraL.png"
-
+import {CiUser,CiHeart, IoCartOutline, CiBag1, CiSearch} from "react-icons/ci"
+import {Text,
+  HStack,
+  Badge,
+  VStack,
+  Icon,
+  MenuItem,
+  Menu,
+  MenuButton,
+  MenuList,
+  Tag,
+  useDisclosure,
+} from "@chakra-ui/react"
 const Div = styled.nav`
   position: fixed;
   display: flex;
@@ -22,6 +34,7 @@ const Div = styled.nav`
 
 export const Navbar = () => {
   const navigate=useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Div>
@@ -739,19 +752,21 @@ export const Navbar = () => {
        
         <div className="inp1">
         <p style={{ marginLeft: "4%",marginRight:"4%",margintop:"5%"}}>
-          <img
+          {/* <img
             style={{ width:"40px",
               marginLeft: "10%", fontSize: "5px" }}
             src="https://img.icons8.com/color/search"
             alt=""
-          /></p>
+          /> */}
+          <Icon as={CiSearch} fontSize="lg" mt="15px" />
+          </p>
           <input
             type="text"
             className="inp"
             placeholder="Search for products, brands and more"
           />
         </div>
-        <Link to={"/login"}>
+        {/* <Link to={"/login"}>
         <p >
           <img
             style={{ marginLeft: "10%", fontSize: "17px" }}
@@ -759,18 +774,109 @@ export const Navbar = () => {
             alt=""
           />
           {/* <br></br> */}
-          <br></br>
+          {/* <br></br>
         <span> Login </span>
-        </p></Link>
-       
+        </p></Link> */} 
+      
+    
+
+
+
+
+   <VStack spacing={"0px"}>
+   <Menu isOpen={isOpen}>
+          <MenuButton
+              onMouseEnter={onOpen}
+              onMouseLeave={onClose}
+          >
+    <VStack spacing={"3px"}>
+    <Icon as={CiUser} fontSize="lg" />
+    <Text
+    fontSize={"12px"}
+    fontWeight={"500"}  
+    color={"#282c3f"}
+    >Profile
+    </Text>
+    </VStack>
+             
+          </MenuButton>
+          <MenuList onMouseEnter={onOpen} onMouseLeave={onClose}>
+              <MenuItem>
+              
+              <VStack spacing={2} alignItems="flex-start">
+        <Text
+        fontSize={"14px"}
+        color="#333333"
+        fontWeight={"500"}
+        >Welcome</Text>
+        <Text
+        fontSize={"14px"}
+        color="#333333"
+        >{false?"To remove account access":"To access account and manage orders"}</Text>
+       <Tag
+       variant={"outline"}
+       colorScheme="pink"
+        size={"md"}
+       fontSize={"14px"}
+       onClick={()=>{false?navigate("/signup"):navigate("/signup")}}
+       >
+      {false?"LOGOUT":" LOGIN/SIGNUP"}
+       </Tag>
+      
+
+
+              </VStack>
+              
+              </MenuItem>
+              <hr />
+              <MenuItem
+        fontSize={"13px"}
+              
+              >Orders</MenuItem>
+              <MenuItem
+        fontSize={"13px"}
+        onClick={()=>navigate("/wishlist")}
+              >Wishlist</MenuItem>
+              <MenuItem
+        fontSize={"13px"}
+              
+              >Gift Cards</MenuItem>
+              <MenuItem
+        fontSize={"13px"}
+              
+              >Contact Us</MenuItem>
+              <MenuItem>
+              <HStack
+        fontSize={"14px"}
+        fontWeight="bold"      
+              >
+           <Text>Myntra Insider</Text>
+           <Badge colorScheme="pink" >NEW</Badge>
+              </HStack>
+              </MenuItem>
+
+          </MenuList>
+          
+      </Menu>
+   
+
+   </VStack>
+
+            
         <p style={{ marginLeft: "2%" }}>
-          <img
+          {/* <img
             style={{ marginLeft: "25%" }}
             src="https://img.icons8.com/material-outlined/24/000000/like--v1.png"
             alt=""
-          />
+          /> */}
+           <Icon as={CiHeart} fontSize="lg" />
           <br></br>
-          <span>Wishlist</span>
+          <Text
+    fontSize={"12px"}
+    fontWeight={"500"}  
+    color={"#282c3f"}
+    >Wishlist
+    </Text>
         </p>
 
         <Link
@@ -784,13 +890,21 @@ export const Navbar = () => {
         >
           {" "}
           <p>
-            <img
+            {/* <img
               style={{ marginLeft: "3%" }}
               src="https://img.icons8.com/material-outlined/24/000000/shopping-bag--v1.png"
               alt=""
             />
             <br></br>
-            <span>Bag</span>
+            <span>Bag</span> */}
+            <Icon as={CiBag1} fontSize="lg" />
+          <br></br>
+          <Text
+    fontSize={"12px"}
+    fontWeight={"500"}  
+    color={"#282c3f"}
+    >cart
+    </Text>
           </p>
         </Link>
       </Div>
