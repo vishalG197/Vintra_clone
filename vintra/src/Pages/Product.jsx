@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
 import ProductCart from "./ProductComponent/ProductCart"
-import Radio from "./ProductComponent/Radio"
+import Radios from "./ProductComponent/Radio"
 import CheckBox from "./ProductComponent/CheckBox"
-// import Loader from "./Loader";
-
+import Loader from "./Loader";
+import { Box, Flex, Spacer, Text,Spinner,Grid} from "@chakra-ui/react";
 export default function Product(){
 const [products,setProducts]=useState([]);
 const [selectedGender, setSelectedGender] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedSearch, setSelectedSearch] = useState("");
-const[Err,setError]=useState(true)
+const[load,setLoad]=useState(true)
   const getProducts = () => {
-   fetch("http://localhost:3000/products")
+   fetch("http://localhost:3000/products?_limit=9&&_Page=1")
      .then((response) =>{console.log(response)
-      setError(true)
+      setLoad(true)
      return response.json()})
      .then((data) => data)
      .then((data) => {
       console.log(data)
        setProducts(data);
-       setError(false)
+       setLoad(false)
      });}
    // Gender push in array
   var genderArr = [];
@@ -102,27 +102,27 @@ const[Err,setError]=useState(true)
 // Filtered Data Logic
  const filteredData = () => {
    if (
-     selectedGender.length === 0 &&
-     selectedBrand.length === 0 &&
-     selectedCategory.length === 0 &&
+     selectedGender?.length === 0 &&
+     selectedBrand?.length === 0 &&
+     selectedCategory?.length === 0 &&
      selectedSearch === ""
    ) {
      return products;
-   } else if (selectedGender.length !== 0) {
+   } else if (selectedGender?.length !== 0) {
      if (
-       selectedGender.length !== 0 &&
-       selectedBrand.length !== 0 &&
-       selectedCategory.length !== 0
+       selectedGender?.length !== 0 &&
+       selectedBrand?.length !== 0 &&
+       selectedCategory?.length !== 0
      ) {
        return products
          .filter((product) => selectedGender.includes(product.gender))
          .filter((product) => selectedBrand.includes(product.brand))
          .filter((product) => selectedCategory.includes(product.category));
-     } else if (selectedGender.length !== 0 && selectedBrand.length !== 0) {
+     } else if (selectedGender?.length !== 0 && selectedBrand?.length !== 0) {
        return products
          .filter((product) => selectedGender.includes(product.gender))
          .filter((product) => selectedBrand.includes(product.brand));
-     } else if (selectedCategory.length !== 0 && selectedGender.length !== 0) {
+     } else if (selectedCategory?.length !== 0 && selectedGender?.length !== 0) {
        return products
          .filter((product) => selectedGender.includes(product.gender))
          .filter((product) => selectedCategory.includes(product.category));
@@ -149,40 +149,42 @@ const[Err,setError]=useState(true)
      );
    }
  };
-//  if(Err){
-//    return <Loader/>
-// }
- return <>
- <main>
-        <div className="container-fluid mt-4">
-          <div className="row">
-            <div className="col-md-2 fw-bold">
-              <aside>
-                <div className="mx-1 my-1 py-1">
-                  <div>
-                    <div className="my-2">FILTERS</div>
-                    {genFinal?.map((val) => {
+ if(load){
+   return <Loader/>
+}
+
+ return (
+  <Box width={"98%"} gap="10px" m={"auto"} bg="white" mt="150px">
+      <Flex display={["none", "flex", "Flex"]}>
+        <Box w="20%" display={["none", "initial" ,"initial", "initial"]} >
+        <Box w="100%" p="3" display={["none", "flex", "Flex"]}>
+          <Flex p="10px">
+            <Text color={"black"} as="b">
+              FILTER
+            </Text>
+            <Spacer />
+            <Text pl="15px" color="red">CLEAR ALL</Text>
+            </Flex>
+            </Box>
+        <Box border={"1px solid black"} borderBottom={"0px"} p="10px">
+    <Text color={"black"} textAlign={"start"} mt="5px" mb="10px">Gender</Text>
+      
+    {genFinal?.map((val) => {
                       return (
-                        <Radio value={val} label={val} onClick={genderFilter} />
+                        <Radios value={val} label={val} onClick={genderFilter} />
                       );
                     })}
-                  </div>
-                </div>
-
-                <div className="mx-1 my-1 py-1">
-                  <div>
-                    <div className="my-2">CATEGORIES</div>
-                    {catFinal?.map((val) => {
+  </Box>
+  <Box border={"1px solid black"} borderBottom={"0px"} p="10px">
+  <Text color={"black"} textAlign={"start"} mt="5px" mb="10px">Category</Text>
+            {catFinal?.map((val) => {
                       return (
                         <CheckBox value={val} label={val} onClick={catFilter} />
                       );
                     })}
-                  </div>
-                </div>
-
-                <div className="mx-1 my-1 py-1">
-                  <div>
-                    <div className="my-2">BRAND</div>
+                    </Box>
+                    <Box border={"1px solid black"} borderBottom={"1px"} p="10px">
+                    <Text color={"black"} textAlign={"start"} mt="5px" mb="10px">Brand</Text>
                     {brandFinal?.map((val) => {
                       return (
                         <CheckBox
@@ -192,33 +194,56 @@ const[Err,setError]=useState(true)
                         />
                       );
                     })}
-                  </div>
-                </div>
-              </aside>
-            </div>
+                    </Box>
 
-            <div className="col-md-10">
-              <section>
-                <div className="row products">
-                  {filteredData()?.map((val) => {
-                    return (
-                      <ProductCart
-                        img={val.searchImage}
-                        product={val.product}
-                        brand={val.brand}
-                        sizes={val.sizes}
-                        price={val.price}
-                        mrp={val.mrp}
-                        dis={val.discountDisplayLabel}
-                        link={val.landingPageUrl}
-                      />
-                    );
-                  })}
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-      </main>
- </>
+
+</Box>
+       
+     
+<Box w="80%" display={["none", "initial" ,"initial", "initial"]} ml="30px" >
+      <Flex>
+        
+        {false ? (
+          <Box m="auto">
+            {" "}
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          </Box>
+        ) : ( 
+        <Box className="row products">
+          <Grid templateColumns='repeat(3, 1fr)' gap={10}>
+          {filteredData().map((val) => {
+            return (
+             
+              <ProductCart
+                img={val.searchImage}
+                product={val.product}
+                brand={val.brand}
+                sizes={val.sizes}
+                price={val.price}
+                mrp={val.mrp}
+                dis={val.discountDisplayLabel}
+                link={val.landingPageUrl}
+              />
+              
+            );
+          })} 
+           </Grid>
+         
+          </Box>
+        
+          
+        
+        )}
+      </Flex>
+      </Box>
+      </Flex>
+    </Box>
+  
+ )
 }
