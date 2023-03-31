@@ -1,9 +1,10 @@
 {
-  "name": "vintra_dead_juice_5954",
+  "name": "vintra",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "^2.5.4",
+    "@chakra-ui/icons": "^2.0.18",
+    "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@testing-library/jest-dom": "^5.16.5",
@@ -13,9 +14,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-loaders-kit": "^0.1.3",
-    "react-router-dom": "^6.10.0",
-    "react-scripts": "^0.2.3",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
     "react-slideshow-image": "^4.2.1",
     "styled-components": "^5.3.9",
     "web-vitals": "^2.1.4"
@@ -45,7 +45,6 @@
     ]
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.5.0",
     "sass": "^1.60.0"
   }
 }
