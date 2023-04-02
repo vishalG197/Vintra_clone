@@ -12,7 +12,7 @@ const [selectedGender, setSelectedGender] = useState([]);
   const [selectedSearch, setSelectedSearch] = useState("");
 const[load,setLoad]=useState(true)
   const getProducts = () => {
-   fetch("http://localhost:3000/products?_limit=9&&_Page=1")
+   fetch("https://buyfashionvish.onrender.com/products")
      .then((response) =>{console.log(response)
       setLoad(true)
      return response.json()})
@@ -221,6 +221,7 @@ const[load,setLoad]=useState(true)
             return (
              
               <ProductCart
+              id={val.productId}
                 img={val.searchImage}
                 product={val.product}
                 brand={val.brand}
@@ -229,6 +230,7 @@ const[load,setLoad]=useState(true)
                 mrp={val.mrp}
                 dis={val.discountDisplayLabel}
                 link={val.landingPageUrl}
+
               />
               
             );

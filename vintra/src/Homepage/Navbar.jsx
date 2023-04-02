@@ -64,7 +64,7 @@ export const Navbar = () => {
               paddingLeft: "5px",
               paddingRight: "5px",
             }}
-            to="/Men"
+            to="/products"
           >
             MEN
           </Link>
@@ -201,7 +201,7 @@ export const Navbar = () => {
               paddingLeft: "5px",
               paddingRight: "5px",
             }}
-            to="/Women"
+            to="/products"
           >
             WOMEN
           </Link>
@@ -342,7 +342,7 @@ export const Navbar = () => {
               paddingRight: "5px",
               marginBottom: "-2%",
             }}
-            to="/Kids"
+            to="/products"
           >
             KIDS
           </Link>
@@ -465,7 +465,7 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* <Link style={{ marginLeft: "2%", fontWeight: "bold", fontSize: "17px", textDecoration: "none", color: '#282C3F' }} to="/homeandkitchen">Home & Living</Link> */}
+        
 
         <div className="link1">
           <Link
@@ -886,7 +886,7 @@ export const Navbar = () => {
             textDecoration: "none",
             color: "#282C3F",
           }}
-          to="/cart/:id"
+          to="/cart"
         >
           {" "}
           <p>

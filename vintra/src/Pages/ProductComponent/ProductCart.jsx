@@ -1,9 +1,10 @@
 import React from "react";
 import { Box} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 const ProductCart = (props) => {
-
+let navigate=useNavigate();
   return (
-    <Box className="col-md-3 my-1" >
+    <Box className="col-md-3 my-1"  onClick={()=>navigate(`/products/${props.id}`)}>
       <div
         className="card border-0 shadow-sm p-3 mb-5 bg-white rounded px-0 py-0"
         style={{ width: "17.5rem" }}
